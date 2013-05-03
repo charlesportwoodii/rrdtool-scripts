@@ -14,6 +14,7 @@ my $img = '/var/www/stats';
 
 # process data for each interface (add/delete as required)
 &ProcessInterface("eth0", "local network");
+&ProcessInterface("eth1", "local network");
 
 sub ProcessInterface
 {
