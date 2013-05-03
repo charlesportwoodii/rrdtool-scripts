@@ -22,7 +22,7 @@ fi
 
 $rrdtool update $db -t in:out N:`/sbin/ifconfig $if |grep bytes|cut -d":" -f2|cut -d" " -f1`:`/sbin/ifconfig $if |grep bytes|cut -d":" -f3|cut -d" " -f1`
 
-for period in day week month year
+for period in hour day week month year
 do
 	$rrdtool graph $img/network-$period.png -s -1$period \
 	-t "Network traffic the last $period" -z \

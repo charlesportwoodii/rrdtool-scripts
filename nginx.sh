@@ -21,7 +21,7 @@ fi
 
 $rrdtool update $db -t requests N:`wget -qO- $url |head -3|tail -1|cut -d' ' -f4`
 
-for period in day week month year
+for period in hour day week month year
 do
 	$rrdtool graph $img/requests-$period.png -s -1$period \
 	-t "Requests the last $period" -z \

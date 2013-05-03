@@ -20,7 +20,7 @@ fi
 
 $rrdtool update $db -t usage N:`free -b |grep cache:|cut -d":" -f2|awk '{print $1}'`
 
-for period in day week month year
+for period in hour day week month year
 do
 	$rrdtool graph $img/memory-$period.png -s -1$period \
 	-t "Memory usage the last $period" -z \
