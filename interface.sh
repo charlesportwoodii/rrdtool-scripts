@@ -12,7 +12,7 @@ img=/var/www/stats
 if [ ! -e $db0 ]
 then 
 	$rrdtool create $db0 \
-		-s 10 \
+		-s 60 \
 		DS:in:DERIVE:600:0:12500000 \
 		DS:out:DERIVE:600:0:12500000 \
 		RRA:AVERAGE:0.5:1:576 \
@@ -24,7 +24,7 @@ fi
 if [ ! -e $db1 ]
 then 
 	$rrdtool create $db1 \
-		-s 10 \
+		-s 60 \
 		DS:in:DERIVE:600:0:12500000 \
 		DS:out:DERIVE:600:0:12500000 \
 		RRA:AVERAGE:0.5:1:576 \
