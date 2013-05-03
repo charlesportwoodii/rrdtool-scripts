@@ -31,12 +31,12 @@ then
 		RRA:AVERAGE:0.5:144:14
 fi
 
-in0=$(which ifconfig eth0 |grep bytes|cut -d":" -f2|cut -d" " -f1)
-out0=$(which ifconfig eth0 |grep bytes|cut -d":" -f3|cut -d" " -f1)
+in0=$(ifconfig eth0 | grep bytes | cut -d ":" -f2 | cut -d " " -f1)
+out0=$(ifconfig eth0 | grep bytes | cut -d ":" -f3 | cut -d " " -f1)
 
-echo "$in0 $out0"
-in1=$(which ifconfig eth0 |grep bytes|cut -d":" -f2|cut -d" " -f1)
-out1=$(which ifconfig eth0 |grep bytes|cut -d":" -f3|cut -d" " -f1)
+in1=$(ifconfig eth1 | grep bytes | cut -d ":" -f2 | cut -d " " -f1)
+out1=$(ifconfig eth1 | grep bytes | cut -d ":" -f3 | cut -d " " -f1)
+
 
 $rrdtool update $db0 -t in:out N:$in0:$out0
 $rrdtool update $db1 -t in:out N:$in1:$out1
