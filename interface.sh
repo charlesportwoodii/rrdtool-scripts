@@ -67,8 +67,8 @@ do
 		-t "Network Traffic on eth1" \
 		--lazy \
 		-l 0 -a PNG -v bytes/sec \
-		DEF:in=$db0:in:AVERAGE \
-		DEF:out=$db0:out:AVERAGE \
+		DEF:in=$db1:in:AVERAGE \
+		DEF:out=$db1:out:AVERAGE \
 		CDEF:out_neg=out,-1,* \
 		"AREA:in#32CD32:Incoming" \
 		"LINE1:in#336600" \
