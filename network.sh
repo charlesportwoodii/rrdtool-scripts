@@ -12,6 +12,7 @@ if=eth0
 if [ ! -e $db ]
 then 
 	$rrdtool create $db \
+	-s 5 \
 	DS:in:DERIVE:600:0:12500000 \
 	DS:out:DERIVE:600:0:12500000 \
 	RRA:AVERAGE:0.5:1:576 \
@@ -20,7 +21,7 @@ then
 	RRA:AVERAGE:0.5:144:1460
 fi
 
-$rrdtool update $db -t in:out N:`/sbin/ifconfig $if |grep bytes|cut -d":" -f2|cut -d" " -f1`:`/sbin/ifconfig $if |grep bytes|cut -d":" -f3|cut -d" " -f1`
+$rrdtool updatev $db -t in:out N:`/sbin/ifconfig $if |grep bytes|cut -d":" -f2|cut -d" " -f1`:`/sbin/ifconfig $if |grep bytes|cut -d":" -f3|cut -d" " -f1`
 
 for period in hour day week month year
 do

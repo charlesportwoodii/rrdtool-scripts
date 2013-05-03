@@ -11,6 +11,7 @@ img=/var/www/stats
 if [ ! -e $db ]
 then 
 	$rrdtool create $db \
+	-s 5 \
 	DS:usage:GAUGE:600:0:50000000000 \
 	RRA:AVERAGE:0.5:1:576 \
 	RRA:AVERAGE:0.5:6:672 \
@@ -18,7 +19,7 @@ then
 	RRA:AVERAGE:0.5:144:1460
 fi
 
-$rrdtool update $db -t usage N:`free -b |grep cache:|cut -d":" -f2|awk '{print $1}'`
+$rrdtool updatev $db -t usage N:`free -b |grep cache:|cut -d":" -f2|awk '{print $1}'`
 
 for period in hour day week month year
 do

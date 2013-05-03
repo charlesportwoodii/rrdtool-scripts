@@ -12,6 +12,7 @@ url=http://127.0.0.1/status
 if [ ! -e $db ]
 then 
 	$rrdtool create $db \
+	-s 5 \
 	DS:requests:DERIVE:600:0:50000000000 \
 	RRA:AVERAGE:0.5:1:576 \
 	RRA:AVERAGE:0.5:6:672 \
@@ -19,7 +20,7 @@ then
 	RRA:AVERAGE:0.5:144:1460
 fi
 
-$rrdtool update $db -t requests N:`wget -qO- $url |head -3|tail -1|cut -d' ' -f4`
+$rrdtool updatev $db -t requests N:`wget -qO- $url |head -3|tail -1|cut -d' ' -f4`
 
 for period in hour day week month year
 do
