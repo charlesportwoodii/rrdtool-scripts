@@ -12,6 +12,7 @@ img=/var/www/stats
 if [ ! -e $db0 ]
 then 
 	$rrdtool create $db0 \
+		-s 10 \
 		DS:in:DERIVE:600:0:12500000 \
 		DS:out:DERIVE:600:0:12500000 \
 		RRA:AVERAGE:0.5:1:576 \
@@ -23,6 +24,7 @@ fi
 if [ ! -e $db1 ]
 then 
 	$rrdtool create $db1 \
+		-s 10 \
 		DS:in:DERIVE:600:0:12500000 \
 		DS:out:DERIVE:600:0:12500000 \
 		RRA:AVERAGE:0.5:1:576 \
@@ -37,9 +39,8 @@ out0=$(ifconfig eth0 | grep bytes | cut -d ":" -f3 | cut -d " " -f1)
 in1=$(ifconfig eth1 | grep bytes | cut -d ":" -f2 | cut -d " " -f1)
 out1=$(ifconfig eth1 | grep bytes | cut -d ":" -f3 | cut -d " " -f1)
 
-
-$rrdtool update $db0 -t in:out N:$in0:$out0
-$rrdtool update $db1 -t in:out N:$in1:$out1
+$rrdtool updatev $db0 -t in:out N:$in0:$out0
+$rrdtool updatev $db1 -t in:out N:$in1:$out1
 
 for period in hour day week month year
 do
